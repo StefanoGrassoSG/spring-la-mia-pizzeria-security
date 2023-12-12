@@ -40,6 +40,13 @@
 						</a>
 					</h2>
 				</div>
+				<div
+					sec:authorize="isAuthenticated()"			
+				>
+					<h2>
+						Logged User: <span sec:authentication="name"></span>
+					</h2>
+				</div>
 			</div>
 			<div class="p-5 flex-grow-1 border-bottom">
 				
