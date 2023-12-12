@@ -46,6 +46,10 @@
 					<h2>
 						Logged User: <span sec:authentication="name"></span>
 					</h2>
+					<h3>
+					    User Roles:
+					    <span sec:authentication="principal.authorities"></span>
+					</h3>
 				</div>
 			</div>
 			<div class="p-5 flex-grow-1 border-bottom">
