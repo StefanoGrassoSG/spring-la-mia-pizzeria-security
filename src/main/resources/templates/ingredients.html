@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+	<meta charset="ISO-8859-1">
+	<title>ciao</title>
+	 <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+	 <link th:href="@{/css/style.css}" rel="stylesheet">
+	</head>
+	<body>	
+		<header class="d-flex">
+			<div class="p-5 border-end border-bottom">
+				<h2>
+					<a class="text-decoration-none" href="http://localhost:8080">
+						Best Pizzas
+					</a>
+				</h2>
+			</div>
+			<div class="p-5 flex-grow-1 border-bottom">
+				
+			</div>
+		</header>
+		
+		<main>
+			<h1 class="text-center mt-5">
+				Our ingredients
+			</h1>
+			
+			<div class="text-center mb-3">
+				<a class="btn btn-success px-4" th:href="@{'/ingredients/create'}">Add+</a>
+			</div>
+			
+			<div th:if="${deletedPizzaId != null}">
+			    <div th:text="'Hai cancellato la pizza con id = ' + ${deletedPizzaId}" class="alert alert-success"></div>
+			</div>
+						
+			<div class="w-25 m-auto my-cont border">
+				<div class="h-25 d-flex justify-content-center align-items-center">
+					<table class="table table-striped">
+					  <thead>
+						    <tr>
+						      <th scope="col">ID</th>
+						      <th scope="col">Name</th>
+						      <th scope="col">Actions</th>
+						    </tr>
+					  </thead>
+					  <tbody>
+						    <tr th:each="ing : ${ingredient}">						
+							  <th th:text="${ing.id}" scope="row"></th>
+						      <td>
+								  <a class="text-decoration-none text-danger" th:text="${ing.name}"></a>
+							  </td>					    
+						      <td>
+								  <a class="btn btn-warning">Edit</a>
+								  <form 
+										style="display:inline-block"
+										th:action="@{'/ingredients/delete/' + ${ing.id}}"
+										method="POST">
+									
+										<input class="btn btn-danger" type="submit" value="DELETE">	
+								  </form>
+							  </td>					     
+						    </tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

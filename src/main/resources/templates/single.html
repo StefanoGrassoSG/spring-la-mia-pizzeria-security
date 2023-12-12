@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+	<meta charset="ISO-8859-1">
+	<title>ciao</title>
+	 <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+	 <link th:href="@{/css/style.css}" rel="stylesheet">
+	</head>
+	<body>	
+		<header class="d-flex">
+			<div class="p-5 border-end border-bottom">
+				<h2>
+					<a class="text-decoration-none" href="http://localhost:8080">
+						Best Pizzas
+					</a>
+				</h2>
+			</div>
+			<div class="p-5 flex-grow-1 border-bottom">
+				
+			</div>
+		</header>
+		
+		<main>
+			<h1 class="text-center mt-5">
+				Name
+			</h1>
+			
+			<div class="w-25 m-auto border-top border-start border-end">
+				<ul class="p-0 m-0">
+				   <div class="text-center fs-2 border-bottom py-3">
+        				<h3>
+							[[${pizza.name}]]
+						</h3>
+						<div>
+							<img class="w-100 h-100" th:src="@{${pizza.image}}" alt="Immagine">
+						</div>
+						<div>
+							Price: [[${pizza.price}]]€
+						</div>
+						<div class="border-top">
+							<h3>
+								Ingredients
+							</h3>
+							<ul>
+								<li 
+								th:each="ings : ${pizza.ingredients}"
+								th:text="*{ings.name}"
+								>
+								</li>
+							</ul>
+						</div>
+    			   </div>
+				</ul>
+			</div>
+		</main>
+	</body>
+</html>
