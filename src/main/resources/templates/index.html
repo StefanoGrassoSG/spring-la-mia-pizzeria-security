@@ -22,6 +22,24 @@
 						</a>
 					</h2>
 				</div>
+				<div
+					sec:authorize="!isAuthenticated()"			
+				>
+					<h2>
+						<a class="text-decoration-none" href="/login">
+							Login
+						</a>
+					</h2>
+				</div>
+				<div
+					sec:authorize="isAuthenticated()"			
+				>
+					<h2>
+						<a class="text-decoration-none" href="/logout">
+							Logout
+						</a>
+					</h2>
+				</div>
 			</div>
 			<div class="p-5 flex-grow-1 border-bottom">
 				
@@ -41,7 +59,9 @@
 				</form>
 			</div>
 			
-			<div class="text-center mb-3">
+			<div class="text-center mb-3"
+				sec:authorize="hasAuthority('ADMIN')"
+			>
 				<a class="btn btn-success px-4" th:href="@{'/pizzas/create'}">Add+</a>
 				  <a class="btn btn-success" href="/pizzas/special">add special offer</a>
 			</div>
@@ -60,10 +80,14 @@
 						      <th scope="col">Description</th>						
 						      <th scope="col">Price</th>
 						      <th scope="col">Offers</th>
-						      <th scope="col">Offers actions</th>
+						      <th
+						      sec:authorize="hasAuthority('ADMIN')"
+						       scope="col">Offers actions</th>
 						      <th scope="col">Start date</th>
 						      <th scope="col">End date</th>
-						      <th scope="col">Actions</th>
+						      <th
+						      	sec:authorize="hasAuthority('ADMIN')"
+						       scope="col">Actions</th>
 						    </tr>
 					  </thead>
 					  <tbody>
@@ -79,7 +103,9 @@
 									th:text="${specialOffer.title}">
 								</div>	
 							  </td>
-							   <td>
+							   <td
+							   	sec:authorize="hasAuthority('ADMIN')"
+							   >
 								 <a th:each="specialOffer : ${pizza.specialOffers}"
 								 class="btn btn-warning" th:href="@{'/pizzas/special/edit/' + ${specialOffer.id}}">Edit</a>	
 							  </td>
@@ -93,8 +119,11 @@
 									th:text="${specialOffer.endDate}">
 								</div>	
 							  </td>
-						      <td>
-								  <a class="btn btn-warning" th:href="@{'/pizzas/edit/' + ${pizza.id}}">Edit</a>
+						      <td
+						      	sec:authorize="hasAuthority('ADMIN')"
+						      >
+								  <a
+								   class="btn btn-warning" th:href="@{'/pizzas/edit/' + ${pizza.id}}">Edit</a>
 								  <form 
 										style="display:inline-block"
 										th:action="@{'/pizzas/delete/' + ${pizza.id}}"

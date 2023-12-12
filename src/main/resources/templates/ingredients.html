@@ -26,7 +26,9 @@
 				Our ingredients
 			</h1>
 			
-			<div class="text-center mb-3">
+			<div
+				sec:authorize="hasAuthority('ADMIN')"		
+			 class="text-center mb-3">
 				<a class="btn btn-success px-4" th:href="@{'/ingredients/create'}">Add+</a>
 			</div>
 			
@@ -41,7 +43,9 @@
 						    <tr>
 						      <th scope="col">ID</th>
 						      <th scope="col">Name</th>
-						      <th scope="col">Actions</th>
+						      <th
+						      	sec:authorize="hasAuthority('ADMIN')"
+						       scope="col">Actions</th>
 						    </tr>
 					  </thead>
 					  <tbody>
@@ -50,7 +54,9 @@
 						      <td>
 								  <a class="text-decoration-none text-danger" th:text="${ing.name}"></a>
 							  </td>					    
-						      <td>
+						      <td
+								sec:authorize="hasAuthority('ADMIN')"						      
+						      >
 								  <form 
 										style="display:inline-block"
 										th:action="@{'/ingredients/delete/' + ${ing.id}}"
